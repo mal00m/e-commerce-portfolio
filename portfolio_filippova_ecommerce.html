@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Татьяна Филиппова — портфолио</title>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1a1a; --ink-2: #444; --ink-3: #888;
+    --rule: #e0ddd8; --bg: #faf9f7; --bg-card: #fff;
+    --accent: #c4602a; --accent-light: #f5ede7;
+    --tag-bg: #f0ede8; --tag-text: #5a4e44;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; line-height: 1.65; }
+
+  .site-header { max-width: 760px; margin: 0 auto; padding: 64px 24px 48px; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+  .site-header h1 { font-family: 'Spectral', serif; font-weight: 300; font-size: clamp(32px, 6vw, 52px); line-height: 1.1; color: var(--ink); margin-bottom: 20px; }
+  .site-header h1 em { font-style: italic; color: var(--accent); }
+  .bio { font-size: 15px; color: var(--ink-2); max-width: 560px; line-height: 1.75; margin-bottom: 28px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-size: 12px; background: var(--tag-bg); color: var(--tag-text); padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
+  .section-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 24px; }
+
+  .case { background: var(--bg-card); border: 1px solid var(--rule); border-radius: 4px; margin-bottom: 20px; overflow: hidden; transition: box-shadow .18s; }
+  .case:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+  .case-header { padding: 28px 32px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .case-meta { flex: 1; }
+  .case-category { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .case-title { font-family: 'Spectral', serif; font-weight: 400; font-size: 20px; line-height: 1.3; color: var(--ink); margin-bottom: 10px; }
+  .case-summary { font-size: 14px; color: var(--ink-3); }
+  .case-result-badge { flex-shrink: 0; background: var(--accent-light); color: var(--accent); font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 3px; text-align: center; line-height: 1.4; white-space: nowrap; }
+  .toggle-icon { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; color: var(--ink-3); font-size: 18px; transition: transform .2s; margin-top: 2px; }
+  .case.open .toggle-icon { transform: rotate(45deg); }
+
+  .case-body { display: none; padding: 0 32px 32px; border-top: 1px solid var(--rule); }
+  .case.open .case-body { display: block; }
+  .case-body h3 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 24px 0 10px; }
+  .case-body p { font-size: 14px; color: var(--ink-2); margin-bottom: 10px; line-height: 1.75; }
+  .case-body ul { list-style: none; padding: 0; }
+  .case-body ul li { font-size: 14px; color: var(--ink-2); padding: 5px 0 5px 20px; position: relative; line-height: 1.65; }
+  .case-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+
+  .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .compare-col { border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .compare-col-head { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; font-weight: 600; }
+  .compare-col-head.before { background: #f5f5f5; color: #888; }
+  .compare-col-head.after { background: var(--accent-light); color: var(--accent); }
+  .compare-col ul { padding: 10px 14px; }
+  .compare-col ul li { font-size: 13px; color: var(--ink-2); padding: 3px 0; list-style: none; }
+  .compare-col ul li::before { display: none; }
+
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 12px 0; }
+  .metric { background: var(--accent-light); border-radius: 3px; padding: 14px 16px; }
+  .metric-value { font-family: 'Spectral', serif; font-size: 26px; font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 4px; }
+  .metric-label { font-size: 12px; color: var(--ink-3); line-height: 1.4; }
+
+  .note { font-size: 13px; color: var(--ink-3); margin-top: 8px; font-style: italic; }
+
+  .contacts { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--rule); display: flex; gap: 24px; flex-wrap: wrap; }
+  .contact-link { font-size: 14px; color: var(--ink-2); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+  @media (max-width: 600px) {
+    .case-header { flex-wrap: wrap; }
+    .case-result-badge { order: -1; }
+    .compare-wrap { grid-template-columns: 1fr; }
+    .case-body { padding: 0 20px 24px; }
+    .case-header { padding: 20px 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="eyebrow">Портфолио · E-commerce</p>
+  <h1>Татьяна<br>Филиппова <em>&amp; контент</em></h1>
+  <p class="bio">Работаю с контентом в e-commerce: проектирую структуру каталогов, строю редакционные стандарты, продвигаю категории через SEO и оптимизацию карточек. Опыт в обуви, парфюмерии, детских товарах, технике.</p>
+  <div class="tags">
+    <span class="tag">E-commerce content</span>
+    <span class="tag">Каталог &amp; мерчендайзинг</span>
+    <span class="tag">SEO</span>
+    <span class="tag">Фэшн &amp; обувь</span>
+    <span class="tag">Home &amp; lifestyle</span>
+    <span class="tag">Парфюмерия</span>
+  </div>
+</header>
+
+<main>
+  <p class="section-label">Кейсы</p>
+
+  <!-- КЕЙС 1: SEO -->
+  <div class="case" id="case-seo">
+    <div class="case-header" onclick="toggle('case-seo')">
+      <div class="case-meta">
+        <p class="case-category">SEO · Посадочные страницы</p>
+        <h2 class="case-title">«Белые мужские кроссовки» — 1-е место в Яндексе</h2>
+        <p class="case-summary">On-page оптимизация, семантическое ядро, технический аудит, ТЗ для разработки</p>
+      </div>
+      <div class="case-result-badge">№1 органика<br>Яндекс</div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="case-body">
+      <h3>Ситуация</h3>
+      <p>Посадочная страница категории не соответствовала поисковому интенту: показывала все мужские кроссовки без фильтра по цвету. Meta description отсутствовал, title занимал 23 символа без бренда и призыва к действию, canonical не был задан.</p>
+
+      <h3>Что было сделано</h3>
+      <ul>
+        <li>Привела товарную выдачу в соответствие поисковому интенту: настроила фильтрацию в CMS по цвету</li>
+        <li>Оптимизировала Meta Title: с 23 до 58 символов, ключевой запрос + бренд + структура под сниппет</li>
+        <li>Написала Meta Description с нуля: 143 символа, цена от + акция + способы получения + CTA</li>
+        <li>Собрала семантическое ядро через Яндекс Вордстат, определила частотность и сезонность, выявила точки роста для 5+ новых посадочных страниц</li>
+        <li>Провела технический аудит: отсутствие canonical, проблема Deep Link на мобильных, технические дубли через параметр ?ysclid</li>
+        <li>Подготовила ТЗ для разработчиков и SEO-гайдлайн для контент-отдела</li>
+      </ul>
+
+      <h3>Результат</h3>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">№1</div>
+          <div class="metric-label">органика Яндекса по запросу «белые мужские кроссовки»</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">выше</div>
+          <div class="metric-label">Ozon, Яндекс Маркета и Спортмастера</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">18К</div>
+          <div class="metric-label">запросов в месяц в пик сезона (март–май)</div>
+        </div>
+      </div>
+
+      <h3>Инструменты</h3>
+      <p>CMS kari.com · Яндекс Вордстат · SEO-расширение Chrome · анализ HTTP-редиректов</p>
+    </div>
+  </div>
+
+  <!-- КЕЙС 2: A/B ТЕСТ -->
+  <div class="case" id="case-ab">
+    <div class="case-header" onclick="toggle('case-ab')">
+      <div class="case-meta">
+        <p class="case-category">A/B тест · CTR · Конверсия</p>
+        <h2 class="case-title">Тест превью-изображений — мужские кроссовки</h2>
+        <p class="case-summary">Смена ракурса съёмки на 67 артикулах, сравнение апрель / май</p>
+      </div>
+      <div class="case-result-badge">CTR +25%<br>CR +47%</div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="case-body">
+      <h3>Задача</h3>
+      <p>Проверить гипотезу: влияет ли ракурс превью-изображения на кликабельность карточки и конверсию в покупку в категории «Мужские кроссовки».</p>
+
+      <h3>Что было сделано</h3>
+      <ul>
+        <li>В апреле изменила ракурс превью-изображений на 67 артикулах категории</li>
+        <li>Еженедельно отслеживала динамику CTR и CR по тестируемым артикулам</li>
+        <li>По итогам мая провела сравнительный анализ показателей до и после изменений</li>
+      </ul>
+
+      <h3>Результат</h3>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">+25%</div>
+          <div class="metric-label">CTR: с 1.79% до 2.23%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">+47%</div>
+          <div class="metric-label">CR: с 1.27% до 1.87%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">+45%</div>
+          <div class="metric-label">заказы: с 1 418 до 2 062</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">75%</div>
+          <div class="metric-label">артикулов показали рост CTR</div>
+        </div>
+      </div>
+      <p class="note">Рост частично обусловлен сезонностью категории (пик спроса — май). Данные из внутренних отчётов kari.com.</p>
+    </div>
+  </div>
+
+  <!-- КЕЙС 3: МУЖСКАЯ ОБУВЬ -->
+  <div class="case" id="case-shoes">
+    <div class="case-header" onclick="toggle('case-shoes')">
+      <div class="case-meta">
+        <p class="case-category">Оптимизация категории · Аналитика</p>
+        <h2 class="case-title">Продвижение категории «Мужская обувь»</h2>
+        <p class="case-summary">Оптимизация 451 артикула, еженедельный мониторинг метрик, сравнительный анализ</p>
+      </div>
+      <div class="case-result-badge">451<br>артикул</div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="case-body">
+      <h3>Задача</h3>
+      <p>Повысить конверсию категории мужской обуви через комплексную оптимизацию карточек товаров. Период: февраль–май 2026.</p>
+
+      <h3>Что было сделано</h3>
+      <ul>
+        <li>Провела оптимизацию карточек по подкатегориям: полуботинки (в т.ч. демисезонные и для активного отдыха), кеды, кроссовки, туфли классические, лоферы, мокасины — SEO-наименования, атрибуты, описания, поисковые теги и префиксы</li>
+        <li>Еженедельно отслеживала эффективность по метрикам: показы, CTR, CR, добавления в корзину, заказы</li>
+        <li>Проводила сравнительный анализ проработанных и непроработанных артикулов по итогам месяца</li>
+        <li>Провела A/B тестирование превью-изображений для увеличения конверсии в клик</li>
+      </ul>
+
+      <h3>Результаты по данным апреля</h3>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">8 868</div>
+          <div class="metric-label">заказов у проработанных артикулов</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">23,6 млн ₽</div>
+          <div class="metric-label">выручка проработанных артикулов</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">vs 2 980</div>
+          <div class="metric-label">заказов у непроработанных (7,3 млн ₽)</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">×3</div>
+          <div class="metric-label">разница в заказах и выручке при сопоставимом объёме позиций</div>
+        </div>
+      </div>
+      <p class="note">Данные из внутренних ежемесячных отчётов kari.com по показам, кликам, корзинам и заказам.</p>
+    </div>
+  </div>
+
+  <!-- КЕЙС 4: НАУШНИКИ -->
+  <div class="case" id="case-earphones">
+    <div class="case-header" onclick="toggle('case-earphones')">
+      <div class="case-meta">
+        <p class="case-category">Атрибуты · Структура данных</p>
+        <h2 class="case-title">Система атрибутов категории «Наушники»</h2>
+        <p class="case-summary">Проектирование шаблона импорта с нуля, запуск фильтрации на сайте</p>
+      </div>
+      <div class="case-result-badge">4 → 20<br>атрибутов</div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="case-body">
+      <h3>Ситуация</h3>
+      <p>Карточки категории содержали только базовые идентификаторы товара. Фильтрация в интернет-магазине не работала — покупатель не мог отсеять наушники по типу подключения, времени работы или версии Bluetooth.</p>
+
+      <h3>Что было сделано</h3>
+      <ul>
+        <li>Изучила отзывы и вопросы покупателей на сайте, сформировала пул высокочастотных запросов перед покупкой наушников; провела анализ карточек конкурентов</li>
+        <li>Спроектировала систему из 20 атрибутов — каждый закрывает реальный критерий выбора или сравнения моделей</li>
+        <li>Запросила технические характеристики у отдела закупок, разработала шаблон импорта в Excel с нуля</li>
+        <li>Наполнила данными 33 артикула, обеспечила запуск фильтрации по категории</li>
+      </ul>
+
+      <h3>Было / стало</h3>
+      <div class="compare-wrap">
+        <div class="compare-col">
+          <div class="compare-col-head before">До — 4 поля</div>
+          <ul>
+            <li>Артикул</li>
+            <li>Наименование</li>
+            <li>Состав</li>
+            <li>Страна-производитель</li>
+          </ul>
+        </div>
+        <div class="compare-col">
+          <div class="compare-col-head after">После — 20 полей</div>
+          <ul>
+            <li>Тип / вид наушников</li>
+            <li>Версия Bluetooth</li>
+            <li>Время работы гарнитуры</li>
+            <li>Ёмкость кейса-зарядки</li>
+            <li>Разъём кабеля</li>
+            <li>Шумоподавление</li>
+            <li>Материал амбушюр</li>
+            <li>Комплектация + ещё 12 полей</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Результат</h3>
+      <p>На сайте появились работающие фильтры по ключевым характеристикам. Покупатель получил возможность сравнивать модели без необходимости открывать каждую карточку вручную.</p>
+    </div>
+  </div>
+
+  <!-- КЕЙС 5: ПАРФЮМЕРИЯ -->
+  <div class="case" id="case-perfume">
+    <div class="case-header" onclick="toggle('case-perfume')">
+      <div class="case-meta">
+        <p class="case-category">Редакционный стандарт · Парфюмерия</p>
+        <h2 class="case-title">Редстандарт и атрибуты категории «Парфюмерия»</h2>
+        <p class="case-summary">Шаблон атрибутов с нуля, прямая коммуникация с производителем, Tone of voice категории</p>
+      </div>
+      <div class="case-result-badge">100<br>артикулов</div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="case-body">
+      <h3>Ситуация</h3>
+      <p>Категория парфюмерии запускалась с нуля. Характеристики товаров отсутствовали во внутренних системах — данные хранились только на стороне производителя.</p>
+
+      <h3>Что было сделано</h3>
+      <ul>
+        <li>Разработала шаблон импорта атрибутов с нуля: группа аромата, тип, верхние ноты / ноты сердца / базовые ноты</li>
+        <li>Вышла на прямой контакт с производителем, запросила и получила необходимые характеристики (переписка на английском языке)</li>
+        <li>Провела анализ редакционных подходов конкурентов: Золотое Яблоко, Рив Гош, Иль де Ботэ</li>
+        <li>Разработала формулу описания аромата через образ, сценарий и сезонность; тексты создавались с помощью ИИ по заданной структуре и редактировались вручную до соответствия единому Tone of voice</li>
+      </ul>
+
+      <h3>Пример описания</h3>
+      <p style="font-size:13px; background: var(--accent-light); padding: 14px 16px; border-radius: 3px; font-style: italic; line-height: 1.8;">«Игривый цветочно-восточный взрыв аромата. Открывается необычными нотами попкорна, ванили, кокоса и иланг-иланга. Сердце смягчается персиком и цветком апельсина. База из мускуса, амбры и сандала делает композицию мягкой и обволакивающей. Аромат держится легко и ненавязчиво, оставляя вокруг лёгкий сладковатый шлейф на несколько часов — отличный выбор для офиса, прогулок и неформальных встреч. Наиболее гармонично чувствует себя в прохладную осеннюю и зимнюю погоду. Неординарный и запоминающийся, он станет отличным презентом для близкого человека.»</p>
+
+      <h3>Результат</h3>
+      <p>100 артикулов с единым редакционным стандартом. Структурированные атрибуты нот обеспечили работу фильтров по группам аромата.</p>
+    </div>
+  </div>
+
+  <!-- КЕЙС 6: ДЕТСКИЕ АВТОКРЕСЛА -->
+  <div class="case" id="case-kids">
+    <div class="case-header" onclick="toggle('case-kids')">
+      <div class="case-meta">
+        <p class="case-category">Атрибуты · Межотдельная координация</p>
+        <h2 class="case-title">Атрибуты категории «Детские автокресла»</h2>
+        <p class="case-summary">Структурированные данные по безопасности, работа с несколькими источниками данных</p>
+      </div>
+      <div class="case-result-badge">32<br>артикула</div>
+      <div class="toggle-icon">+</div>
+    </div>
+    <div class="case-body">
+      <h3>Ситуация</h3>
+      <p>Категория детских автокресел требовала структурированных атрибутов для корректной фильтрации. Данные были рассредоточены по нескольким источникам внутри компании.</p>
+
+      <h3>Что было сделано</h3>
+      <ul>
+        <li>Определила источники данных: карточки товаров смежного отдела (маркетплейсы) и отдел закупок — собрала информацию по обоим каналам</li>
+        <li>Разработала структуру атрибутов по логике выбора родителя: возрастная группа, максимальный вес ребёнка, тип крепления (штатный ремень / ISOFIX), способ установки, ключевые особенности модели</li>
+        <li>Наполнила данными 32 артикула</li>
+      </ul>
+
+      <h3>Что показывает этот кейс</h3>
+      <ul>
+        <li>Умею выстраивать процесс сбора данных из нескольких внутренних источников</li>
+        <li>Проектирую структуру атрибутов исходя из логики принятия решения покупателем</li>
+        <li>Работала с категорией высокой ответственности — безопасность детей</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CONTACTS -->
+  <div class="contacts">
+    <a href="https://t.me/tfilipp0va" class="contact-link" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M21 5 2 12.5l7 1M21 5l-4 14-8-5.5M21 5 9 13.5m0 0V19l3-3"/></svg>
+      @tfilipp0va
+    </a>
+    <a href="tel:+79221967866" class="contact-link">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
+      +7 922 196-78-66
+    </a>
+    <a href="https://ekaterinburg.hh.ru/resume/384abb28ff08c9882e0039ed1f7973765a4866" class="contact-link" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
+      Резюме на hh.ru
+    </a>
+  </div>
+
+</main>
+
+<script>
+function toggle(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+</script>
+</body>
+</html>
