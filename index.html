@@ -45,6 +45,17 @@
   .case-body ul li { font-size: 14px; color: var(--ink-2); padding: 5px 0 5px 20px; position: relative; line-height: 1.65; }
   .case-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
 
+  /* Ссылки внутри кейсов */
+  .case-link { font-size: 13px; color: var(--ink-3); margin-top: 10px; }
+  .case-link-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; margin-right: 6px; }
+  .case-link a, .case-summary a, .case-body a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  .case-link a:hover, .case-summary a:hover, .case-body a:hover { text-decoration-thickness: 2px; }
+
   .compare-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
   .compare-col { border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
   .compare-col-head { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 8px 14px; font-weight: 600; }
@@ -80,7 +91,7 @@
 <header class="site-header">
   <p class="eyebrow">Портфолио · E-commerce</p>
   <h1>Татьяна<br>Филиппова <em>&amp; контент</em></h1>
-  <p class="bio"> Контент-менеджер интернет-магазина с 2+ летним опытом в e-commerce. Веду полный цикл управления товарным каталогом интернет-магазина. Создаю и настраиваю шаблоны товарных атрибутов для различных категорий (преимущественно сегмент fashion).Имею базовые навыки обработки изображений в графических редакторах (сжатие, обрезка, цветокоррекция, изменение формата). Анализирую ключевые метрики (показы, клики, CTR, добавления в корзину, заказы, конверсия). Уверенный пользователь Excel (ВПР, сводные таблицы, формулы, PQ, большие файлы импорта/экспорта).  </p>
+  <p class="bio">Контент-менеджер интернет-магазина с 2+ летним опытом в e-commerce. Веду полный цикл управления товарным каталогом интернет-магазина. Создаю и настраиваю шаблоны товарных атрибутов для различных категорий (преимущественно сегмент fashion). Имею базовые навыки обработки изображений в графических редакторах (сжатие, обрезка, цветокоррекция, изменение формата). Анализирую ключевые метрики (показы, клики, CTR, добавления в корзину, заказы, конверсия). Уверенный пользователь Excel (ВПР, сводные таблицы, формулы, PQ, большие файлы импорта/экспорта).</p>
   <div class="tags">
     <span class="tag">Наполнение контентом</span>
     <span class="tag">Обработка изображений</span>
@@ -100,7 +111,8 @@
       <div class="case-meta">
         <p class="case-category">SEO · Посадочные страницы</p>
         <h2 class="case-title">«Белые мужские кроссовки» — 1-е место в Яндексе</h2>
-        <p class="case-summary">On-page оптимизация, семантическое ядро, технический аудит, ТЗ для разработки для https://kari.com/alternative/male-sneakers-white/ </p>
+        <p class="case-summary">On-page оптимизация, семантическое ядро, технический аудит, ТЗ для разработки</p>
+        <p class="case-link"><span class="case-link-label">Где</span><a href="https://kari.com/alternative/male-sneakers-white/" target="_blank" rel="noopener noreferrer">kari.com/alternative/male-sneakers-white</a></p>
       </div>
       <div class="case-result-badge">№1 органика<br>Яндекс</div>
       <div class="toggle-icon">+</div>
@@ -136,7 +148,7 @@
       </div>
 
       <h3>Инструменты</h3>
-      <p>CMS kari.com · Яндекс Вордстат · SEO-расширение Chrome · анализ HTTP-редиректов</p>
+      <p>CMS <a href="https://kari.com" target="_blank" rel="noopener noreferrer">kari.com</a> · Яндекс Вордстат · SEO-расширение Chrome · анализ HTTP-редиректов</p>
     </div>
   </div>
 
@@ -147,6 +159,7 @@
         <p class="case-category">A/B тест · CTR · Конверсия</p>
         <h2 class="case-title">Тест превью-изображений — мужские кроссовки</h2>
         <p class="case-summary">Смена ракурса съёмки на 67 артикулах, сравнение апрель / май</p>
+        <p class="case-link"><span class="case-link-label">Где</span><a href="https://kari.com/catalog/muzhchinam/muzhskaya-obuv/krossovki/" target="_blank" rel="noopener noreferrer">kari.com/catalog/muzhchinam/muzhskaya-obuv/krossovki</a></p>
       </div>
       <div class="case-result-badge">CTR +25%<br>CR +47%</div>
       <div class="toggle-icon">+</div>
@@ -192,13 +205,14 @@
         <p class="case-category">Оптимизация категории · Аналитика</p>
         <h2 class="case-title">Продвижение категории «Мужская обувь»</h2>
         <p class="case-summary">Оптимизация 451 артикула, еженедельный мониторинг метрик, сравнительный анализ</p>
+        <p class="case-link"><span class="case-link-label">Где</span><a href="https://kari.com" target="_blank" rel="noopener noreferrer">kari.com</a></p>
       </div>
       <div class="case-result-badge">451<br>артикул</div>
       <div class="toggle-icon">+</div>
     </div>
     <div class="case-body">
       <h3>Задача</h3>
-      <p>Повысить конверсию категории мужской обуви в интернет-магизне kari.com через комплексную оптимизацию карточек товаров. Период: февраль–май 2026.</p>
+      <p>Повысить конверсию категории мужской обуви в интернет-магазине <a href="https://kari.com" target="_blank" rel="noopener noreferrer">kari.com</a> через комплексную оптимизацию карточек товаров. Период: февраль–май 2026.</p>
 
       <h3>Что было сделано</h3>
       <ul>
@@ -238,6 +252,7 @@
         <p class="case-category">Атрибуты · Структура данных</p>
         <h2 class="case-title">Система атрибутов категории «Наушники»</h2>
         <p class="case-summary">Проектирование шаблона импорта с нуля, запуск фильтрации на сайте</p>
+        <p class="case-link"><span class="case-link-label">Где</span><a href="https://kari.com/catalog/tekhnika/f/categories/naushn_h/" target="_blank" rel="noopener noreferrer">kari.com/catalog/tekhnika/f/categories/naushn_h</a></p>
       </div>
       <div class="case-result-badge">4 → 20<br>атрибутов</div>
       <div class="toggle-icon">+</div>
@@ -292,6 +307,7 @@
         <p class="case-category">Редакционный стандарт · Парфюмерия</p>
         <h2 class="case-title">Редстандарт и атрибуты категории «Парфюмерия»</h2>
         <p class="case-summary">Шаблон атрибутов с нуля, прямая коммуникация с производителем, Tone of voice категории</p>
+        <p class="case-link"><span class="case-link-label">Где</span><a href="https://kari.com/catalog/zhenschinam/krasota-i-zdorove/parfyumeriya/" target="_blank" rel="noopener noreferrer">kari.com/catalog/zhenschinam/krasota-i-zdorove/parfyumeriya</a></p>
       </div>
       <div class="case-result-badge">100<br>артикулов</div>
       <div class="toggle-icon">+</div>
@@ -323,6 +339,7 @@
         <p class="case-category">Атрибуты · Межотдельная координация</p>
         <h2 class="case-title">Атрибуты категории «Детские автокресла»</h2>
         <p class="case-summary">Структурированные данные по безопасности, работа с несколькими источниками данных</p>
+        <p class="case-link"><span class="case-link-label">Где</span><a href="https://kari.com/catalog/detskie-tovaryi/kolyaski-i-avtokresla/avtokresla/" target="_blank" rel="noopener noreferrer">kari.com/catalog/detskie-tovaryi/kolyaski-i-avtokresla/avtokresla</a></p>
       </div>
       <div class="case-result-badge">32<br>артикула</div>
       <div class="toggle-icon">+</div>
@@ -349,7 +366,7 @@
 
   <!-- CONTACTS -->
   <div class="contacts">
-    <a href="https://t.me/tfilipp0va" class="contact-link" target="_blank">
+    <a href="https://t.me/tfilipp0va" class="contact-link" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24"><path d="M21 5 2 12.5l7 1M21 5l-4 14-8-5.5M21 5 9 13.5m0 0V19l3-3"/></svg>
       @tfilipp0va
     </a>
@@ -357,7 +374,7 @@
       <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16z"/></svg>
       +7 922 196-78-66
     </a>
-    <a href="https://ekaterinburg.hh.ru/resume/384abb28ff08c9882e0039ed1f7973765a4866" class="contact-link" target="_blank">
+    <a href="https://ekaterinburg.hh.ru/resume/384abb28ff08c9882e0039ed1f7973765a4866" class="contact-link" target="_blank" rel="noopener noreferrer">
       <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M8 12h8M12 8v8"/></svg>
       Резюме на hh.ru
     </a>
@@ -369,6 +386,10 @@
 function toggle(id) {
   document.getElementById(id).classList.toggle('open');
 }
+// Клик по ссылке в шапке кейса не должен сворачивать/разворачивать карточку
+document.querySelectorAll('.case-header a').forEach(function (a) {
+  a.addEventListener('click', function (e) { e.stopPropagation(); });
+});
 </script>
 </body>
 </html>
